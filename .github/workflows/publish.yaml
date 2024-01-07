@@ -68,7 +68,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: charmed-zookeeper
+          name: zookeeper
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -80,12 +80,11 @@ jobs:
       - name: Import and push to GHCR
         run: |
       
-          REPOSITORY="ghcr.io/canonical/"
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
       
-          IMAGE_NAME="${REPOSITORY}charmed-zookeeper"
+          IMAGE_NAME="ghcr.io/canonical/zookeeper"
 
           ROCK_FILE=${{ needs.build.outputs.rock }}
 

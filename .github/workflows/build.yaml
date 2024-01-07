@@ -46,12 +46,12 @@ jobs:
 
           rockcraft pack --verbose
 
-          echo "rock=charmed-zookeeper_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
+          echo "rock=zookeeper_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
 
       - name: Upload locally built ROCK artifact
         uses: actions/upload-artifact@v3
         with:
-          name: charmed-zookeeper
+          name: zookeeper
           path: ${{ steps.build.outputs.rock }}
     outputs:
       rock: ${{ steps.build.outputs.rock }}
@@ -69,15 +69,15 @@ jobs:
           sudo snap install --devmode --channel edge skopeo
       - uses: actions/download-artifact@v3
         with:
-          name: charmed-zookeeper
+          name: zookeeper
       - name: Test Image
         run: |
 
           sudo skopeo --insecure-policy copy \
             oci-archive:${{ needs.build.outputs.rock }} \
-            docker-daemon:charmed-zookeeper:latest
+            docker-daemon:zookeeper:latest
 
-          docker run -d -p 2181:2181 charmed-zookeeper:latest
+          docker run -d -p 2181:2181 zookeeper:latest
 
           sleep 10 
           CHECK=$(echo srvr | nc localhost 2181 | grep "Mode" | wc -l)
