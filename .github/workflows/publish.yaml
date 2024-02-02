@@ -62,10 +62,6 @@ jobs:
         run: |
           sudo snap install --devmode --channel edge skopeo
 
-      - name: Install yq
-        run: |
-          sudo snap install yq
-
       - uses: actions/download-artifact@v3
         with:
           name: zookeeper
