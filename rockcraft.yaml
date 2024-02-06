@@ -121,10 +121,8 @@ parts:
         '${Source:Version}\n'
       )
 
-      # yamllint disable-line rule:line-length
       (
         IFS="," && \
         echo "# os-release" && cat /etc/os-release && echo "# dpkg-query" && \
-        dpkg-query --admindir=$CRAFT_PRIME/var/lib/dpkg/ \
-        -f "${FIELDS[*]}" -W
+        dpkg-query --admindir=$CRAFT_PRIME/var/lib/dpkg/ -f "${FIELDS[*]}" -W
       ) > $CRAFT_PRIME/usr/share/rocks/dpkg.query
