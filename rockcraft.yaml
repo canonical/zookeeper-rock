@@ -6,7 +6,7 @@ base: ubuntu@22.04  # the base environment for this ROCK
 version: '3.8.2'  # just for humans. Semantic versioning is recommended
 summary: Apache ZooKeeper OCI Image  # 79 char long summary
 description: |
-  Current Apache ZooKeeper Docker Image from Canonical, based
+  Apache ZooKeeper Image from Canonical, based
   on [Ubuntu](https://ubuntu.com/). Receives security updates and tracks the
   newest combination of Apache ZooKeeper and Ubuntu. This
   repository is free to use and exempted from per-user rate limits.
@@ -45,10 +45,14 @@ parts:
       "https://github.com/canonical/central-uploader/releases/download\
       /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0\
       /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0-20231121152605.tgz"
-    stage-packages:
+    overlay-packages:
       - openjdk-8-jre-headless
-    build-environment:
-      - JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64/
+    overlay-script: |
+      # Java linking
+      rm usr/bin/java
+      rm -vf usr/lib/jvm/java-8-openjdk-amd64/lib/security/cacerts
+      ln -s /usr/lib/jvm/java-8-openjdk-amd64/bin/java usr/bin/java
+
     override-build: |
       # Base directory skeleton
       mkdir -p $CRAFT_PART_INSTALL/var/lib/zookeeper/
@@ -70,14 +74,6 @@ parts:
         $CRAFT_PART_INSTALL/etc/zookeeper/zoo.cfg
       echo "dataLogDir=/var/lib/zookeeper/data-log" >> \
         $CRAFT_PART_INSTALL/etc/zookeeper/zoo.cfg
-
-      # Java linking
-      ln -s /usr/lib/jvm/java-8-openjdk-amd64/bin/java \
-        $CRAFT_PART_INSTALL/usr/bin/java
-
-    override-prime: |
-      craftctl default
-      rm -vf usr/lib/jvm/java-8-openjdk-amd64/lib/security/cacerts
 
   non-root-user:
     plugin: nil
