@@ -48,10 +48,8 @@ parts:
     overlay-packages:
       - openjdk-8-jre-headless
     overlay-script: |
-      # Java linking
-      rm usr/bin/java
+      # Removing cacerts
       rm -vf usr/lib/jvm/java-8-openjdk-amd64/lib/security/cacerts
-      ln -s /usr/lib/jvm/java-8-openjdk-amd64/bin/java usr/bin/java
 
     override-build: |
       # Base directory skeleton
