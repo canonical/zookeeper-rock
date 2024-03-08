@@ -7,8 +7,8 @@ version: '3.8.4'  # just for humans. Semantic versioning is recommended
 summary: Apache ZooKeeper OCI Image  # 79 char long summary
 description: |
   Apache ZooKeeper Image from Canonical, based
-  on [Ubuntu](https://ubuntu.com/). Receives security updates for Apache 
-  ZooKeeper and Ubuntu. This repository is free to use and exempted from 
+  on [Ubuntu](https://ubuntu.com/). Receives security updates for Apache
+  ZooKeeper and Ubuntu. This repository is free to use and exempted from
   per-user rate limits.
 
   ZooKeeper is a centralized service for maintaining configuration
