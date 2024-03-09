@@ -24,7 +24,7 @@ platforms:  # The platforms this ROCK should be built on and run on
   amd64:
 
 environment:
-  JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+  JAVA_HOME: /usr/lib/jvm/java-18-openjdk-amd64
   ZOO_LOG_DIR: /var/log/zookeeper
   ZOOCFGDIR: /etc/zookeeper
 
@@ -46,10 +46,10 @@ parts:
       /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0\
       /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0-20240308113314.tgz"
     overlay-packages:
-      - openjdk-8-jre-headless
+      - openjdk-18-jre-headless
     overlay-script: |
       # Removing cacerts
-      rm -vf usr/lib/jvm/java-8-openjdk-amd64/lib/security/cacerts
+      rm -vf usr/lib/jvm/java-18-openjdk-amd64/lib/security/cacerts
 
     override-build: |
       # Base directory skeleton
