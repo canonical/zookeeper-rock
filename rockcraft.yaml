@@ -43,8 +43,8 @@ parts:
     plugin: nil
     source:
       "https://github.com/canonical/central-uploader/releases/download\
-      /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0\
-      /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu0-20260310054444.tgz"
+      /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu1\
+      /zookeeper-${CRAFT_PROJECT_VERSION}-ubuntu1-20260310095752.tgz"
     overlay-packages:
       - openjdk-18-jre-headless
     overlay-script: |
